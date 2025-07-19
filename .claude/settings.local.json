@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "WebFetch(domain:github.com)",
+      "mcp__ide__getDiagnostics",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": []
+  }
+}
