@@ -33,3 +33,70 @@ h1, h2, h3 {
 html {
   scroll-behavior: smooth;
 }
+
+/* MagicUI Animations */
+@keyframes shimmer-slide {
+  to {
+    translate: var(--shimmer-distance, 200%) 0;
+  }
+}
+
+@keyframes spin-around {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-shimmer-slide {
+  animation: shimmer-slide var(--speed) ease-in-out infinite;
+}
+
+.animate-spin-around {
+  animation: spin-around calc(var(--speed) * 2) infinite linear;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 8s linear infinite;
+  --bg-size: 400%;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -300% -300%;
+  }
+}
+
+/* Alternative shine animation for testing */
+@keyframes shine-alt {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-shine {
+  animation: shine var(--duration) linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-safe\:animate-shine {
+    animation: shine var(--duration) linear infinite;
+  }
+}

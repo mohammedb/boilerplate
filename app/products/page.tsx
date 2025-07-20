@@ -6,6 +6,7 @@ import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
+import { ShineBorder } from '@/components/magicui/shine-border';
 
 // Example products - in a real app, these would come from a database
 const products = [
@@ -98,24 +99,17 @@ export default function ProductsPage() {
               key={product.id}
               variants={staggerItem}
               custom={index}
-              className={`relative bg-[#1a1a1a] rounded-[32px] p-8 border transition-all ${
-                product.popular ? 'border-[#E8FC6B] shadow-[0_0_30px_rgba(232,252,107,0.2)]' : 'border-[#F9F9F9]/10'
-              }`}
-              whileHover={{ 
-                scale: 1.02,
-                borderColor: product.popular ? undefined : "rgba(232, 252, 107, 0.5)",
-                transition: { duration: 0.3 }
-              }}
+              className="relative"
             >
               {product.popular && (
                 <motion.div 
-                  className="absolute -top-4 left-1/2 transform -translate-x-1/2"
+                  className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20"
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
                 >
                   <motion.span 
-                    className="px-4 py-1 bg-[#E8FC6B] text-[#111111] rounded-full text-xs font-semibold"
+                    className="px-4 py-1 bg-[#E8FC6B] text-[#111111] rounded-full text-xs font-semibold whitespace-nowrap"
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
@@ -123,8 +117,27 @@ export default function ProductsPage() {
                   </motion.span>
                 </motion.div>
               )}
-              
-              <div className="mb-8">
+              <motion.div
+                className={`relative bg-[#1a1a1a] rounded-[32px] p-8 overflow-hidden ${
+                  product.popular 
+                    ? 'shadow-[0_0_30px_rgba(232,252,107,0.2)]' 
+                    : 'border border-[#F9F9F9]/10'
+                }`}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
+              >
+                {product.popular && (
+                  <ShineBorder 
+                    shineColor={["#E8FC6B", "#ffaa40", "#E8FC6B"]}
+                    borderWidth={2}
+                    duration={10}
+                  />
+                )}
+                <div className="relative z-10">
+                
+                <div className="mb-8">
                 <h2 className="text-2xl font-serif text-[#F9F9F9] mb-2">{product.name}</h2>
                 <p className="text-[#A0A0A0] text-sm">{product.description}</p>
               </div>
@@ -187,6 +200,8 @@ export default function ProductsPage() {
                     : 'bg-transparent border border-[#F9F9F9]/20 text-[#F9F9F9] hover:border-[#E8FC6B] hover:text-[#E8FC6B]'
                 }`}
               />
+              </div>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
